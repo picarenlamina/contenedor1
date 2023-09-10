@@ -9,4 +9,4 @@ jobs:
       - name: Start containers
         run: docker-compose -f "docker-compose.yml" up -d --build
       - name: Test
-        run: docker run --network container:webapp-frontend appropriate/curl -s --retry 10 --retry-connrefused http://localhost:80/prueba.html
+        run: docker run --network container:docker-php appropriate/curl -s --retry 10 --retry-connrefused http://localhost:80/prueba.html
