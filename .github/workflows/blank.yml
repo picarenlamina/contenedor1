@@ -1,32 +1,9 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
-
-# Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-
-
+name: docker-compose-actions-workflow
+on: push
 jobs:
-  test-compose-action:
+  test:
     runs-on: ubuntu-latest
-    name: test compose action
     steps:
-      - uses: actions/checkout@v3
-      - uses: adambirds/docker-compose-action@v1.3.0
-    
-      - uses: ./
-        with:
-          compose-file: "./docker/docker-compose.yml"
-          services: |
-            web
-            mysql
-    
+      - uses: actions/checkout@v2
+      - name: Build the stack
+        run: docker-compose up -d ./docker/docker-compose.yml
